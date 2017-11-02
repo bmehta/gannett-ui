@@ -1,5 +1,7 @@
-<p>This is partial for view</p>
-<div>
+<div ng-if="vm.loading">
+    Loading...
+</div>
+<div ng-if="!vm.loading">
     <div>Select an input</div>
     <div>
         <input list="listFibonacci" ng-model="vm.selectedNumber" ng-change="vm.trackSelected()"/>
@@ -7,4 +9,5 @@
             <option ng-repeat="num in vm.fibonacciNumbers track by $index" value="{{num}}"></option>
          </datalist>
     </div>
+    <div>Current total: {{vm.currentTotal}}</div>
 </div>
