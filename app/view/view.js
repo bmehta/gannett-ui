@@ -13,8 +13,9 @@ angular.module('myApp.view', ['ngRoute'])
   var vm=this;
   vm.loading = true;
   vm.fibonacciNumbers = [];
+    vm.history = [];
+
   vm.selectedNumber;
-  vm.selectedNumberArray = [];
 
   vm.request1 = $http.get('http://localhost:3000/api/fibonacci')
       .then(function(result){
@@ -30,7 +31,14 @@ angular.module('myApp.view', ['ngRoute'])
 
       });
 
-  $q.all([vm.request1, vm.request2]).then(function(){
+    vm.request3 = $http.get('http://localhost:3000/api/history')
+        .then(function(result){
+            vm.history = result.data;
+        }, function(error) {
+            console.error('Could not fetch history data: ' + JSON.stringify(error));
+        });
+
+  $q.all([vm.request1, vm.request2], vm.request3).then(function(){
     vm.loading= false;
   });
 
@@ -48,7 +56,7 @@ angular.module('myApp.view', ['ngRoute'])
 
         $http.post('http://localhost:3000/api/post', data, config).then(function(){
             console.log('posted data successfully');
-            vm.selectedNumberArray.push(selectedNo);
+            vm.history.push(selectedNo);
             vm.currentTotal += selectedNo;
         }, function(error){
             console.error('Could not post data successfully: ' + JSON.stringify(error));

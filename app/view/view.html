@@ -10,4 +10,8 @@
          </datalist>
     </div>
     <div>Current total: {{vm.currentTotal}}</div>
+    <div>
+        <span>History of selected numbers:</span>
+    <span ng-repeat="h in vm.history track by $index">{{h}}&nbsp;</span>
+    </div>
 </div>
