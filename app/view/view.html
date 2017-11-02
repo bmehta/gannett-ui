@@ -1,0 +1,10 @@
+<p>This is partial for view</p>
+<div>
+    <div>Select an input</div>
+    <div>
+        <input list="listFibonacci" ng-model="selectedNumber" ng-change="trackSelectedValue()"/>
+        <datalist id="listFibonacci">
+            <option ng-repeat="num in vm.fibonacciNumbers track by $index" value="{{num}}"></option>
+         </datalist>
+    </div>
+</div>
