@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view', ['ngRoute'])
+angular.module('myApp.view', ['myApp.service','ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
@@ -9,7 +9,7 @@ angular.module('myApp.view', ['ngRoute'])
   });
 }])
 
-.controller('ViewCtrl', ['$scope', '$http', '$q', function($scope, $http, $q) {
+.controller('ViewCtrl', ['$scope', '$http', '$q', 'dataService', function($scope, $http, $q, dataService) {
   var vm=this;
   vm.loading = true;
   vm.fibonacciNumbers = [];
@@ -17,21 +17,21 @@ angular.module('myApp.view', ['ngRoute'])
 
   vm.selectedNumber;
 
-  vm.request1 = $http.get('http://localhost:3000/api/fibonacci')
-      .then(function(result){
-        vm.fibonacciNumbers = result.data;
-      }, function(error) {
-        console.error('Could not fetch fibonacci numbers: ' + JSON.stringify(error));
-      });
+  vm.request1 = dataService.getFibonacci()
+                  .then(function(result){
+                        vm.fibonacciNumbers = result.data;
+                    }, function(error) {
+                        console.error('Could not fetch fibonacci numbers: ' + JSON.stringify(error));
+                    }); 
 
-  vm.request2 = $http.get('http://localhost:3000/api/total')
-      .then(function(result){
-        vm.currentTotal= parseInt(result.data);
-      }, function(error){
+  vm.request2 = dataService.getTotal()
+                  .then(function(result){
+                      vm.currentTotal= parseInt(result.data);
+                  }, function(error){
+            
+                  });
 
-      });
-
-    vm.request3 = $http.get('http://localhost:3000/api/history')
+    vm.request3 = dataService.getHistory()
         .then(function(result){
             vm.history = result.data;
         }, function(error) {
@@ -54,7 +54,7 @@ angular.module('myApp.view', ['ngRoute'])
             'Content-type': 'application/text'
         }};
 
-        $http.post('http://localhost:3000/api/post', data, config).then(function(){
+        dataService.doPost(data, config).then(function(){
             console.log('posted data successfully');
             vm.history.push(selectedNo);
             vm.currentTotal += selectedNo;
