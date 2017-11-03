@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('myApp.service',[])
     .factory('dataService', ['$http', function($http) {
 
