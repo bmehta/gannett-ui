@@ -9,15 +9,15 @@ angular.module('myApp.service',[])
         };
 
         dataService.getTotal = function() {
-            return $http.get('http://localhost:3000/api/total');
+            return $http.get(urlBase + '/total');
         };
 
         dataService.getHistory = function() {
-            return $http.get('http://localhost:3000/api/history');
+            return $http.get(urlBase + '/history');
         };
 
         dataService.doPost = function(data, config) {
-            return $http.post('http://localhost:3000/api/post', data, config);
+            return $http.post(urlBase + '/post', data, config);
         };
 
         return dataService;
