@@ -3,7 +3,7 @@
 angular.module('myApp.view', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/', {
+        $routeProvider.when('/view', {
             templateUrl: 'view/view.html',
             controller: 'ViewCtrl as vm'
         });

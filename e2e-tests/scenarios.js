@@ -14,13 +14,13 @@ describe('my app', function() {
   describe('view', function() {
 
     beforeEach(function() {
-      browser.get('index.html#!/');
+      browser.get('index.html#!/view');
     });
 
 
     it('should render view when user navigates to /view', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/Numbers View/);
+      expect(element.all(by.css('[ng-view] h1')).first().getText()).
+        toMatch(/Numbers UI/);
     });
 
   });

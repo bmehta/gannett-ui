@@ -1,15 +1,20 @@
-<p>Numbers View</p>
+<div><img src="http://mediad.publicbroadcasting.net/p/wxxi/files/styles/medium/public/201610/gannett_new_logo.jpg" alt="Gannett"></div>
+<h1>Numbers UI</h1>
+<div></div>
 <div ng-if="vm.loading">
     Loading...
 </div>
 <div ng-if="!vm.loading">
-    <div>Select an input</div>
     <div>
-        <input list="listFibonacci" ng-model="vm.selectedNumber" ng-change="vm.trackSelected()"/>
-        <datalist id="listFibonacci">
-            <option ng-repeat="num in vm.fibonacciNumbers track by $index" value="{{num}}"></option>
-         </datalist>
+        <span>Select an input: </span>
+        <span>
+            <input list="listFibonacci" ng-model="vm.selectedNumber" ng-change="vm.trackSelected()"/>
+            <datalist id="listFibonacci">
+                <option ng-repeat="num in vm.fibonacciNumbers track by $index" value="{{num}}"></option>
+             </datalist>
+        </span>
     </div>
+
     <div>Current total: {{vm.currentTotal}}</div>
     <div>
         <span>History of selected numbers:</span>
