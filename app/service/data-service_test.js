@@ -15,6 +15,7 @@ describe('dataService', function() {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
+    // Tests for the data service
     it ('calls http backend to get data', function() {
        var fibonacci = [0,1,1,2,3];
         var history = [1,2];

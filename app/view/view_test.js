@@ -6,7 +6,8 @@ describe('myApp.view module', function() {
 
     beforeEach(module('myApp.view'));
 
-    describe('view controller', function(){
+    // Tests for the view controller
+    describe('view controller tests', function(){
 
         it('should ....', inject(function($controller, $rootScope, $q) {
             //spec body
