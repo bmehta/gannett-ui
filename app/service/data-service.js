@@ -1,5 +1,6 @@
 'use strict';
 
+// Service to return data from numbers http server
 angular.module('myApp.service',[])
     .factory('dataService', ['$http', function($http) {
 

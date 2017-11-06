@@ -38,10 +38,12 @@ angular.module('myApp.view', ['ngRoute'])
                 console.error('Could not fetch history data: ' + JSON.stringify(error));
             });
 
+        // Make vm.loading false when all 3 requests have resolved
         $q.all([vm.request1, vm.request2], vm.request3).then(function () {
             vm.loading = false;
         });
 
+        // Function to post selection and also track it
 
         vm.trackSelected = function () {
             var selectedNo = parseInt(vm.selectedNumber);
