@@ -16,36 +16,44 @@ angular.module('myApp.view', ['ngRoute'])
         vm.history = [];
 
         vm.selectedNumber;
+        vm.request1 = function(){
+            return dataService.getFibonacci();
+        };
+        vm.request2 = function(){
+            return dataService.getTotal();
+        };
+        vm.request3 = function(){
+            return dataService.getHistory();
+        };
 
-        vm.request1 = dataService.getFibonacci()
-            .then(function (result) {
-                vm.fibonacciNumbers = result.data;
-            }, function (error) {
-                console.error('Could not fetch fibonacci numbers: ' + JSON.stringify(error));
-            });
+        vm.request1().then(function (result) {
+            vm.fibonacciNumbers = result.data;
+            console.log('result data: ' + result.data);
+        }, function (error) {
+            console.error('Could not fetch fibonacci numbers: ' + JSON.stringify(error));
+        });
 
-        vm.request2 = dataService.getTotal()
-            .then(function (result) {
+        vm.request2().then(function (result) {
                 vm.currentTotal = parseInt(result.data);
             }, function (error) {
-
+                console.error('Could not fetch total data: ' + JSON.stringify(error));
             });
 
-        vm.request3 = dataService.getHistory()
-            .then(function (result) {
+        vm.request3().then(function (result) {
                 vm.history = result.data;
             }, function (error) {
                 console.error('Could not fetch history data: ' + JSON.stringify(error));
             });
 
         // Make vm.loading false when all 3 requests have resolved
-        $q.all([vm.request1, vm.request2], vm.request3).then(function () {
+        $q.all([vm.request1, vm.request2, vm.request3]).then(function () {
             vm.loading = false;
         });
 
         // Function to post selection and also track it
 
         vm.trackSelected = function () {
+            var deferred = $q.defer();
             var selectedNo = parseInt(vm.selectedNumber);
             if (vm.fibonacciNumbers.indexOf(selectedNo) > -1) {
                 console.log(vm.selectedNumber);
@@ -62,10 +70,13 @@ angular.module('myApp.view', ['ngRoute'])
                     console.log('posted data successfully');
                     vm.history.push(selectedNo);
                     vm.currentTotal += selectedNo;
+                    deferred.resolve();
                 }, function (error) {
                     console.error('Could not post data successfully: ' + JSON.stringify(error));
+                    deferred.reject(error);
                 });
             }
+            return deferred.promise;
 
         }
 
