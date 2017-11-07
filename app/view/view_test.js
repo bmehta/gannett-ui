@@ -42,7 +42,7 @@ describe('myApp.view module', function() {
 
             viewCtrl.trackSelected().then(function(){
                 expect(viewCtrl.currentTotal.toBe(6));
-                expect(viewCtrl.history).toBe([1,2],3);
+                expect(viewCtrl.history).toBe([1,2,3]);
             })
 
         }));

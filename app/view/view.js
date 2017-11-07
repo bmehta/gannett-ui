@@ -16,12 +16,18 @@ angular.module('myApp.view', ['ngRoute'])
         vm.history = [];
 
         vm.selectedNumber;
+
+        // Request to get first 30 fibonacci numbers
         vm.request1 = function(){
             return dataService.getFibonacci();
         };
+
+        // Request to get total
         vm.request2 = function(){
             return dataService.getTotal();
         };
+
+        // Request to get history
         vm.request3 = function(){
             return dataService.getHistory();
         };
@@ -62,7 +68,7 @@ angular.module('myApp.view', ['ngRoute'])
 
                 var config = {
                     headers: {
-                        'Content-type': 'application/text'
+                        'Content-type': 'application/json'
                     }
                 };
 

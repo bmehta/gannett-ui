@@ -8,15 +8,19 @@
     <div>
         <span>Select an input: </span>
         <span>
-            <input list="listFibonacci" ng-model="vm.selectedNumber" ng-change="vm.trackSelected()"/>
+            <input list="listFibonacci" ng-model="vm.selectedNumber"/>
             <datalist id="listFibonacci">
                 <option ng-repeat="num in vm.fibonacciNumbers track by $index" value="{{num}}"></option>
              </datalist>
         </span>
+        </div>
+    <div class="div-space align-center">
+        <span><button id="btnSubmit" ng-click="vm.trackSelected()">Submit</button></span>
+        <span><button id="btnClear" ng-click="vm.selectedNumber=undefined">Clear</button></span>
     </div>
 
-    <div>Current total: {{vm.currentTotal}}</div>
-    <div>
+    <div class="div-space">Current total: {{vm.currentTotal}}</div>
+    <div class="div-space">
         <span>History of selected numbers:</span>
     <span ng-repeat="h in vm.history track by $index">{{h}}&nbsp;</span>
     </div>
