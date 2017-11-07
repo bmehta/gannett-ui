@@ -141,5 +141,3 @@ Under the hood, Protractor uses the [Selenium Standalone Server][selenium], whic
 the [Java Development Kit (JDK)][jdk] to be installed on your local machine. Check this by running
 `java -version` from the command line.
 
-If JDK is not already installed, you can download it [here][jdk-download].
-
